@@ -29,20 +29,8 @@ int main()
 	sieve(MAX);
 	int num;
 	cin>>num;
-	if(num<100000000){
-       	if(isprime(num)) cout<<"YES"<<endl;
-	else cout<<"NO"<<endl;
-
-	}
-	else{
-        for(int i=2;i<=num/2;i++){
-          if(isprime(i) && (num%i==0)){
-            //if(num%i==0){
-                cout<<"NO"<<endl;
-                return 0;
-            }//}
-
-        }
+   for(int i=2;i<=num;i++){
+	if(isprime(num))
         cout<<"YES"<<endl;
 	}
 
