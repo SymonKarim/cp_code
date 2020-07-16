@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main()
+{
+    int t;
+    cin>>t;
+    ll j=0,n=0,c=1;
+    while(t--){
+        string s;
+        ll d;
+        cin>>s>>d;
+
+         j=0,n=0;
+        if(s[0]=='-') j=1;
+        else j=0;
+        if(d<0) d *=(-1);
+        for(ll i=j;s[i];i++){
+            n =(s[i]-'0')+ n*10;
+            n%=d;
+        }
+          if(n)
+        {
+            printf("Case %d: not divisible\n",c);
+        }
+        else
+            printf("Case %d: divisible\n",c);
+
+            c++;
+    }
+
+  return 0;
+}
