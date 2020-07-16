@@ -1,0 +1,71 @@
+/*** "ALHAMDULILLAH for Everything..." ***/
+#include<bits/stdc++.h>
+using namespace std;
+#define  ll    long long
+#define  pb    push_back
+#define  vl    vector <ll>
+ll pow(ll c,ll d){return d==0?:c*pow(c,d-1);}
+ 
+ 
+bool b[100000000];
+int a[100000000], x=0;
+void calcu(){
+    int i, j;
+    memset(b, true, sizeof(b));
+    for(i=2; i*i<100000000; i++){
+        if(b[i]==true){
+            for(j=i*i; j<100000000; j+=i){
+                b[j]=false;
+            }
+        }
+    }
+    for(i=2; i<100000000; i++){
+        if(b[i]==true){
+            a[x++]=i;
+        }
+    }
+}
+ 
+ 
+int main()
+{
+    ll t, z=0;
+    scanf("%lld", &t);
+    calcu();
+ 
+    while(t--){
+        ll n, m=0, k, i, j, y, p=0, s=0, h, f=0;
+        scanf("%lld", &n);
+        h=n;
+        vl v;
+        for(i=0; i<x && (ll)(a[i])*(ll)(a[i])<=n; i++){
+            k=a[i];
+            y=1;
+            m=0;
+            while(n%k==0){
+                m+=pow(k, y);
+                y++;
+                n/=k;
+            }
+            if(m>0){
+                v.pb(m+1);
+            }
+            if(n<100000000){
+                if(b[n]==true){
+                    v.pb(n+1);
+                    n=1;
+                }
+            }
+        }
+        if(n>1){
+            v.pb(n+1);
+        }
+        y=1;
+        for(i=0; i<v.size(); i++){
+            y*=v[i];
+        }
+        y-=h;
+        printf("%lld\n", y);
+    }
+    return 0;
+}
