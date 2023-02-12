@@ -1,0 +1,54 @@
+//*Bismillahir Rahmanir Raheem
+//! symonkarim
+#include <bits/stdc++.h>
+#define ll long long
+#define FASTER ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
+using namespace std;
+int sz = 0, N = 301;
+int solve(int i, int j, vector<vector<int>>&v, vector<vector<int>>&dp) {
+    if (!v[i][j]) return 0;
+    if (i == sz - 1) return v[i][j];
+    if (dp[i][j] != -1) return dp[i][j];
+    int x = v[i][j] + solve(i + 1, j, v, dp);
+    int y = v[i][j] + solve(i + 1, j + 1, v, dp);
+    return dp[i][j] = max(x, y);
+}
+
+int solveNew()
+{
+    int n; cin >> n;
+    sz = 2 * n - 1;
+    vector<vector<int>>v(N, vector<int>(N, 0));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            cin >> v[i][j];
+        }
+    }
+    int l = 1;
+    for (int i = n; i < sz; i++) {
+        for (int j = l; j < n; j++) {
+            cin >> v[i][j];
+        } l++;
+    }
+    vector<vector<int>>dp(2 * n, vector<int>(n + 1, -1));
+    return solve(0, 0, v, dp);
+}
+
+
+int main()
+{
+    FASTER
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int t; cin >> t; for (int i = 1; i <= t; i++) {
+        cout << "Case " << i << ": " << solveNew() << endl;
+    }
+
+
+    // cout << solveNew() << endl;
+}
+
+
+
